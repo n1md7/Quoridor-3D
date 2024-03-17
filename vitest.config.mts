@@ -43,6 +43,9 @@ export default defineConfig({
         '**/*.schema.ts',
       ],
     },
+    setupFiles: [
+      'test/mock.setup.ts'
+    ]
   },
   resolve: {
     alias: {

@@ -11,14 +11,7 @@ export class ErrorResponse {
   @ApiProperty({
     required: true,
     description: 'HTTP status message',
-    examples: [
-      'Bad request',
-      'Unauthorized',
-      'Forbidden',
-      'Not found',
-      'Unprocessable Content',
-      'Internal Server Error',
-    ],
+    examples: ['Bad request', 'Unauthorized', 'Forbidden', 'Not found', 'Unprocessable Content', 'Internal Server Error'],
   })
   message!: string;
 }

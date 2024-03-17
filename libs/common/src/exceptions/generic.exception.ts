@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
 import { HttpExceptionOptions } from '@nestjs/common/exceptions/http.exception';
 
-export class Exception extends HttpException {
+export class GenericException extends HttpException {
   constructor(response: string | Record<string, any>, status: HttpStatus, options?: HttpExceptionOptions) {
     super(response, status, options);
 
