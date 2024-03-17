@@ -1,5 +1,5 @@
 import { CallHandler, ExecutionContext, HttpException, HttpStatus, Injectable, NestInterceptor } from '@nestjs/common';
-import { Exception } from '/common/exceptions/sse.exception';
+import { Exception } from '/libs/common/src/exceptions/generic.exception';
 import { ExpressRequest } from '/common/types/request.type';
 import { getErrorMessage } from '/common/utils';
 import { catchError, Observable } from 'rxjs';

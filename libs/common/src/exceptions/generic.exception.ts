@@ -8,8 +8,4 @@ export class Exception extends HttpException {
     this.name = this.constructor.name;
     Error.captureStackTrace(this, this.constructor);
   }
-
-  toString() {
-    return `${this.name} [${this.getStatus()}]: ${this.message}, ${this.getResponse()}, ${this.cause}`;
-  }
 }
