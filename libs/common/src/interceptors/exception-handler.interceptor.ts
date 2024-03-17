@@ -1,5 +1,5 @@
 import { CallHandler, ExecutionContext, HttpException, HttpStatus, Injectable, NestInterceptor } from '@nestjs/common';
-import { Exception } from '/libs/common/src/exceptions/generic.exception';
+import { GenericException } from '/common/exceptions/generic.exception';
 import { ExpressRequest } from '/common/types/request.type';
 import { getErrorMessage } from '/common/utils';
 import { catchError, Observable } from 'rxjs';
@@ -12,7 +12,7 @@ export class ExceptionInterceptor implements NestInterceptor {
     return next.handle().pipe(
       catchError((error) => {
         switch (true) {
-          case error instanceof Exception: {
+          case error instanceof GenericException: {
             this.report(error, request);
             throw new HttpException(
               {
