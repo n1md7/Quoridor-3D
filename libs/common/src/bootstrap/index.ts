@@ -5,7 +5,6 @@ import { ExceptionInterceptor } from '/common/interceptors/exception-handler.int
 import { RequestInterceptor } from '/common/interceptors/request.interceptor';
 import { essentials } from '/common/middlewares/essential.middleware';
 import { exitProcess, getErrorMessage, logger } from '/common/utils';
-import { LoggerOverride } from '/common/utils/logger/logger.override';
 import { INestApplication, ValidationPipe, VersioningType } from '@nestjs/common';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
@@ -13,7 +12,6 @@ import { description, name, version } from '/package.json';
 import fs from 'fs';
 import yaml from 'js-yaml';
 import { env } from 'node:process';
-import pinoHttp from 'pino-http';
 
 export function configureVersioning(app: NestExpressApplication) {
   app.setGlobalPrefix('/api');
@@ -25,17 +23,6 @@ export function configureVersioning(app: NestExpressApplication) {
 
 export function configureMiddlewares(app: NestExpressApplication | INestApplication) {
   app.use(essentials);
-  app.use(
-    pinoHttp({
-      transport: {
-        target: 'pino-pretty',
-        options: {
-          colorize: true,
-          colorizeObjects: true,
-        },
-      },
-    }),
-  );
 }
 
 export function configurePipes(app: NestExpressApplication | INestApplication) {
@@ -57,12 +44,12 @@ export function configureFilters(app: NestExpressApplication | INestApplication)
 }
 
 export function configureLogger(app: NestExpressApplication | INestApplication) {
-  app.useLogger(new LoggerOverride());
+  app.useLogger(logger);
 }
 
 export function configureCors(app: NestExpressApplication | INestApplication) {
   const corsWhitelist = env.ORIGIN?.split(',') || [];
-  logger.info(`Enabling following origins: ${corsWhitelist.join(', ') || null}`, 'InstanceLoader');
+  logger.log(`Enabling following origins: ${corsWhitelist.join(', ') || null}`, 'InstanceLoader');
   app.enableCors({
     origin: function (origin, callback) {
       const originNotDefined = !origin;
@@ -86,7 +73,7 @@ export function configureSignals() {
 
   signalsNames.forEach((signalName) =>
     process.on(signalName, (signal) => {
-      logger.info(`Retrieved signal: ${signal}, application terminated`, {
+      logger.log(`Retrieved signal: ${signal}, application terminated`, {
         label: 'SignalHandler',
       });
       exitProcess(`Signal: ${signal}`);

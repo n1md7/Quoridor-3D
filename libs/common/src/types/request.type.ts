@@ -1,8 +1,9 @@
 import { Request } from 'express';
-import { HttpLogger } from 'pino-http';
+import { Logger } from '@nestjs/common';
 
-export interface ExpressRequest extends Request, HttpLogger {
+export interface ExpressRequest extends Request {
   startedAt: number;
   requestId: string;
   sessionId: string;
+  logger: Logger;
 }

@@ -1,17 +1,9 @@
 import { exit, pid } from 'node:process';
 import { ValidationError } from 'class-validator';
 import { AxiosError } from 'axios';
-import { HttpException } from '@nestjs/common';
-import pino from 'pino';
+import { HttpException, Logger } from '@nestjs/common';
 
-export const logger = pino({
-  transport: {
-    target: 'pino-pretty',
-    options: {
-      colorize: true,
-    },
-  },
-});
+export const logger = new Logger('Shared');
 
 export async function delaySync(ms: number) {
   return new Promise((resolve) => {

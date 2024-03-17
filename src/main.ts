@@ -50,7 +50,7 @@ async function bootstrap(cliPort: number) {
 
   const url = await app.getUrl();
 
-  logger.info(`
+  logger.log(`
 
     Application(${name.toUpperCase()}) started at: ${url}
     Swagger docs: ${url}/docs
