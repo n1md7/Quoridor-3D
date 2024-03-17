@@ -1,4 +1,4 @@
-# NestJS SWE Template
+# Quoridor 3D
 
 ## Installation
 
