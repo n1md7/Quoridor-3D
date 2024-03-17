@@ -1,0 +1,20 @@
+openapi: 3.0.0
+paths:
+  /api/v1/health:
+    get:
+      operationId: HealthController_getHealth
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Health
+info:
+  title: NEST-SWE
+  description: NestJS SWE Template
+  version: 0.0.1
+  contact: {}
+tags: []
+servers: []
+components:
+  schemas: {}
